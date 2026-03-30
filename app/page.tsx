@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { supabase, PortfolioItem } from '@/lib/supabase'
+import Link from 'next/link'
+import type { PortfolioItem } from '@/lib/supabase'
 
 export default function PortfolioWebsite() {
   const [portfolio, setPortfolio] = useState<PortfolioItem[]>([])
@@ -62,12 +63,11 @@ export default function PortfolioWebsite() {
   }
 
   const skills = [
-    { name: 'React', level: 95, color: '#61DAFB' },
-    { name: 'TypeScript', level: 90, color: '#3178C6' },
-    { name: 'Next.js', level: 92, color: '#000000' },
-    { name: 'Node.js', level: 88, color: '#339933' },
-    { name: 'Python', level: 85, color: '#3776AB' },
-    { name: 'Supabase', level: 87, color: '#3ECF8E' },
+    { name: 'Website Designing / Mobile App Development', items: ['HTML5', 'CSS', 'JavaScript', 'TypeScript', 'jQuery with PhoneGap'] },
+    { name: 'Database Designing and Creation', items: ['ERD Diagram', 'SQL'] },
+    { name: 'Analytics / Statistics', items: ['Python', 'R Script', 'Social Media Analytics', 'Google Analytics', 'On-site Web Optimisation', 'Tableau', 'Excel PivotChart', 'SPSS', 'Minitab'] },
+    { name: 'Marketing / Design', items: ['Adobe Illustrator', 'Adobe Photoshop'] },
+    { name: 'Financial', items: ['Balance Sheet', 'Profit & Loss Statement', 'Ledger'] },
   ]
 
   return (
@@ -86,13 +86,15 @@ export default function PortfolioWebsite() {
             </div>
             <nav className="hidden md:flex space-x-8">
               <a href="#about" className="pixel-nav-link">About</a>
-              <a href="#projects" className="pixel-nav-link">Projects</a>
+              <Link href="/projects" className="pixel-nav-link">
+                Projects
+              </Link>
               <a href="#skills" className="pixel-nav-link">Skills</a>
               <a href="#contact" className="pixel-nav-link">Contact</a>
             </nav>
-            <button className="pixel-button-primary">
+            <Link href="#contact" className="pixel-button-primary">
               Get in Touch
-            </button>
+            </Link>
           </div>
         </div>
       </header>
@@ -112,9 +114,9 @@ export default function PortfolioWebsite() {
               and a passion for clean code.
             </p>
             <div className="flex justify-center gap-4">
-              <button className="pixel-button-primary-large">
+              <Link href="/projects" className="pixel-button-primary-large">
                 View Projects
-              </button>
+              </Link>
               <button className="pixel-button-secondary-large">
                 Download CV
               </button>
@@ -157,9 +159,9 @@ export default function PortfolioWebsite() {
         <section id="projects" className="mb-20">
           <div className="flex justify-between items-center mb-8">
             <h2 className="text-4xl font-bold pixel-text-section">Featured Projects</h2>
-            <button className="pixel-link-button">
+            <Link href="/projects" className="pixel-link-button">
               View All →
-            </button>
+            </Link>
           </div>
           
           {loading ? (
@@ -190,10 +192,6 @@ export default function PortfolioWebsite() {
                       <span key={tech} className="pixel-tag">{tech}</span>
                     ))}
                   </div>
-                  <div className="mt-6 flex gap-3">
-                    <button className="pixel-button-small">Live Demo</button>
-                    <button className="pixel-button-small-secondary">GitHub</button>
-                  </div>
                 </div>
               ))}
             </div>
@@ -205,21 +203,18 @@ export default function PortfolioWebsite() {
           <h2 className="text-4xl font-bold mb-8 pixel-text-section">Skills & Expertise</h2>
           <div className="pixel-card-large">
             <div className="grid md:grid-cols-2 gap-8">
-              {skills.map((skill) => (
-                <div key={skill.name} className="pixel-skill-item">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="font-bold pixel-text-primary">{skill.name}</span>
-                    <span className="pixel-text-tertiary">{skill.level}%</span>
-                  </div>
-                  <div className="pixel-progress-bar">
-                    <div 
-                      className="pixel-progress-fill" 
-                      style={{ 
-                        width: `${skill.level}%`,
-                        backgroundColor: skill.color
-                      }}
-                    ></div>
-                  </div>
+              {skills.map((group) => (
+                <div key={group.name} className="pixel-skill-item">
+                  <h3 className="text-2xl font-bold mb-4 pixel-text-primary">
+                    {group.name}
+                  </h3>
+                  <ul className="space-y-2">
+                    {group.items.map((item) => (
+                      <li key={item} className="pixel-list-item">
+                        <span className="pixel-bullet">▸</span> {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               ))}
             </div>
@@ -239,12 +234,20 @@ export default function PortfolioWebsite() {
               <div className="pixel-contact-card">
                 <div className="pixel-icon-box">💼</div>
                 <h3 className="font-bold text-lg mb-2 pixel-text-primary">LinkedIn</h3>
-                <p className="pixel-text-tertiary">linkedin.com/in/john</p>
+                <p className="pixel-text-tertiary">
+                  <a href="https://www.linkedin.com/in/seahmingjun-1998/" target="_blank" rel="noreferrer">
+                    https://www.linkedin.com/in/seahmingjun-1998/
+                  </a>
+                </p>
               </div>
               <div className="pixel-contact-card">
                 <div className="pixel-icon-box">🐙</div>
                 <h3 className="font-bold text-lg mb-2 pixel-text-primary">GitHub</h3>
-                <p className="pixel-text-tertiary">github.com/john</p>
+                <p className="pixel-text-tertiary">
+                  <a href="https://github.com/MjXtreme" target="_blank" rel="noreferrer">
+                    https://github.com/MjXtreme
+                  </a>
+                </p>
               </div>
             </div>
           </div>
@@ -255,7 +258,7 @@ export default function PortfolioWebsite() {
       <footer className="bg-white/60 backdrop-blur-sm border-t-2 border-amber-200 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="pixel-text-tertiary">
-            © 2025 John Portfolio. Built with Next.js & Supabase.
+            © 2026 Seah Ming Jun. Built with Next.js & Supabase.
           </p>
         </div>
       </footer>

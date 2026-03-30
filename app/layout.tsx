@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "John Portfolio - Full Stack Developer",
-  description: "Portfolio website featuring pixel-art design, modern web development projects, and specialized hover effects",
+  title: "Seah Ming Jun - Full Stack Developer",
+  description: "Portfolio website featuring pixel-art design, projects, and clean modern UI.",
 };
 
 export default function RootLayout({

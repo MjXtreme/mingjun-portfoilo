@@ -288,6 +288,20 @@ body {
   image-rendering: pixelated;
 }
 
+.pixel-skill-item {
+  background: rgba(255, 255, 255, 0.85);
+  border: 3px solid #1e40af;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.pixel-skill-item:hover {
+  transform: translate(-6px, -6px);
+  box-shadow:
+    6px 6px 0px #1e40af,
+    12px 12px 0px #7c3aed;
+}
+
 .pixel-card::before {
   content: '';
   position: absolute;
@@ -480,6 +494,47 @@ body {
   box-shadow: 
     3px 3px 0px #059669,
     6px 6px 0px #10b981;
+}
+
+/* Project Image Placeholder */
+.pixel-project-image-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 40%, #fbcfe8 100%);
+  border: 3px solid #1e40af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  image-rendering: pixelated;
+}
+
+.pixel-project-image-placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 2px dashed rgba(124, 58, 237, 0.8);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.pixel-project-image-placeholder-inner {
+  font-weight: 800;
+  color: #581c87;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Project Image Frame (used when real screenshots exist) */
+.pixel-project-image-frame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 3px solid #1e40af;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+  image-rendering: pixelated;
 }
 
 /* Skeleton Loading */
