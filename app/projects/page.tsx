@@ -1,27 +1,28 @@
 import type { PortfolioItem } from '@/lib/supabase'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const mockPortfolio: PortfolioItem[] = [
   {
     id: '1',
-    asset_name: 'Donations Dashboard',
-    asset_type: 'Analytics / Dashboards',
+    asset_name: 'Single Product Page',
+    asset_type: 'Web UI / Ecommerce',
     quantity: 1,
     value: 95,
     change_percent: 0,
   },
   {
     id: '2',
-    asset_name: 'Single Product Page',
-    asset_type: 'Web UI / Ecommerce',
+    asset_name: 'Cloud Computing Architecture',
+    asset_type: 'Cloud / System Design',
     quantity: 1,
     value: 88,
     change_percent: 0,
   },
   {
     id: '3',
-    asset_name: 'Cloud Computing Architecture',
-    asset_type: 'Cloud / System Design',
+    asset_name: 'Fullstack Payment Web App',
+    asset_type: 'Orders Analytics Dashboard',
     quantity: 1,
     value: 92,
     change_percent: 0,
@@ -34,25 +35,18 @@ const mockPortfolio: PortfolioItem[] = [
     value: 90,
     change_percent: 0,
   },
-  {
-    id: '5',
-    asset_name: 'Orders Analytics Charts',
-    asset_type: 'Statistics / Visualization',
-    quantity: 1,
-    value: 86,
-    change_percent: 0,
-  },
-  {
-    id: '6',
-    asset_name: 'Frontend UI Polish',
-    asset_type: 'Development / UI',
-    quantity: 1,
-    value: 82,
-    change_percent: 0,
-  },
 ]
 
 export default function ProjectsPage() {
+  // Place images into: public/projects/images/
+  // Then name them: project-1.jpg .. project-4.jpg (in the same order as the cards below)
+  const projectImages = [
+    '/projects/images/project-1.jpg',
+    '/projects/images/project-2.jpg',
+    '/projects/images/project-3.jpg',
+    '/projects/images/project-4.jpg',
+  ]
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50">
       <header className="bg-white/60 backdrop-blur-sm border-b-2 border-amber-200 sticky top-0 z-50 shadow-pixel">
@@ -89,19 +83,35 @@ export default function ProjectsPage() {
         <section className="mb-10">
           <h2 className="text-4xl font-bold pixel-text-section mb-2">Projects</h2>
           <p className="pixel-text-paragraph">
-            Add your real screenshots in `public/projects/images/` and we’ll wire them up.
+            Screenshots are loaded from `public/projects/images/` (see filenames below).
           </p>
         </section>
 
         <section>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {mockPortfolio.map((item, idx) => {
+              const imgSrc = projectImages[idx] ?? projectImages[0]
+
+              const techTags =
+                item.asset_name === 'Fullstack Payment Web App'
+                  ? ['Payments', 'Dashboard', 'Analytics']
+                  : item.asset_name === 'Database System (ERD)'
+                    ? ['ERD', 'SQL', 'Database Design']
+                    : item.asset_name === 'Cloud Computing Architecture'
+                      ? ['Architecture', 'Cloud', 'AWS']
+                      : ['UI', 'Frontend', 'Ecommerce']
+
               return (
                 <div key={item.id} className="pixel-card pixel-card-hover">
-                  <div className="pixel-project-image-placeholder">
-                    <div className="pixel-project-image-placeholder-inner">
-                      Project Image {idx + 1}
-                    </div>
+                  <div className="pixel-project-image-frame">
+                    <Image
+                      src={imgSrc}
+                      alt={`${item.asset_name} screenshot`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      priority={idx < 2}
+                      style={{ objectFit: 'cover' }}
+                    />
                   </div>
 
                   <div className="flex justify-between items-start mb-4 mt-5">
@@ -119,7 +129,7 @@ export default function ProjectsPage() {
                   </p>
 
                   <div className="flex gap-2 flex-wrap">
-                    {['HTML', 'CSS', 'JavaScript', 'TypeScript'].map((tech) => (
+                    {techTags.map((tech) => (
                       <span key={tech} className="pixel-tag">
                         {tech}
                       </span>
