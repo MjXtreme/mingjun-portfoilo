@@ -1,13 +1,5 @@
 import type { PortfolioItem } from '@/lib/supabase'
 import Link from 'next/link'
-import Image from 'next/image'
-
-import projectImg1 from 'C:/Users/mingj/.cursor/projects/c-Users-mingj-Downloads-mingjun-portfoilo/assets/c__Users_mingj_AppData_Roaming_Cursor_User_workspaceStorage_e6bb39c974923897c66fd360f08f8d75_images_IWL1_2-4b2876e9-7a3c-4516-b9b1-0f54e8057fb6.png'
-import projectImg2 from 'C:/Users/mingj/.cursor/projects/c-Users-mingj-Downloads-mingjun-portfoilo/assets/c__Users_mingj_AppData_Roaming_Cursor_User_workspaceStorage_e6bb39c974923897c66fd360f08f8d75_images_web_system-56f94d26-2d8d-4fdf-8b8b-c47e9c4094f8.png'
-import projectImg3 from 'C:/Users/mingj/.cursor/projects/c-Users-mingj-Downloads-mingjun-portfoilo/assets/c__Users_mingj_AppData_Roaming_Cursor_User_workspaceStorage_e6bb39c974923897c66fd360f08f8d75_images_cloud_computing-c965799d-2385-4c96-bc35-d9c5cd1caa85.png'
-import projectImg4 from 'C:/Users/mingj/.cursor/projects/c-Users-mingj-Downloads-mingjun-portfoilo/assets/c__Users_mingj_AppData_Roaming_Cursor_User_workspaceStorage_e6bb39c974923897c66fd360f08f8d75_images_db_sys-2920c939-3180-4e77-b5c9-bd01672ec7d2.png'
-import projectImg5 from 'C:/Users/mingj/.cursor/projects/c-Users-mingj-Downloads-mingjun-portfoilo/assets/c__Users_mingj_AppData_Roaming_Cursor_User_workspaceStorage_e6bb39c974923897c66fd360f08f8d75_images_IWL1-cf6c544c-faac-4ada-b63c-938165ca4aac.png'
-import projectImg6 from 'C:/Users/mingj/.cursor/projects/c-Users-mingj-Downloads-mingjun-portfoilo/assets/c__Users_mingj_AppData_Roaming_Cursor_User_workspaceStorage_e6bb39c974923897c66fd360f08f8d75_images_typing-82978142-6d06-49b6-ba7a-4122dea4385f.png'
 
 const mockPortfolio: PortfolioItem[] = [
   {
@@ -97,26 +89,19 @@ export default function ProjectsPage() {
         <section className="mb-10">
           <h2 className="text-4xl font-bold pixel-text-section mb-2">Projects</h2>
           <p className="pixel-text-paragraph">
-            Image placeholders are ready—replace them with your project screenshots.
+            Add your real screenshots in `public/projects/images/` and we’ll wire them up.
           </p>
         </section>
 
         <section>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {mockPortfolio.map((item, idx) => {
-              const images = [projectImg1, projectImg2, projectImg3, projectImg4, projectImg5, projectImg6]
-              const img = images[idx] ?? projectImg1
-
               return (
                 <div key={item.id} className="pixel-card pixel-card-hover">
-                  <div className="pixel-project-image-frame">
-                    <Image
-                      src={img}
-                      alt={`${item.asset_name} screenshot`}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      priority={idx < 2}
-                    />
+                  <div className="pixel-project-image-placeholder">
+                    <div className="pixel-project-image-placeholder-inner">
+                      Project Image {idx + 1}
+                    </div>
                   </div>
 
                   <div className="flex justify-between items-start mb-4 mt-5">
